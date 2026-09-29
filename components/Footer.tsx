@@ -22,8 +22,8 @@ export function Footer() {
     <footer className="border-t border-space-700 bg-space-900">
       <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr_1.2fr]">
-          <div>
-            <Logo />
+          <div className="flex flex-col items-start">
+            <Logo stacked />
             <p className="mt-4 max-w-xs text-sm text-muted">{site.tagline}</p>
           </div>
           <Col title="Loan Programs" links={loanLinks} />

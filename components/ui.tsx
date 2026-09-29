@@ -3,14 +3,15 @@ import { useId } from "react";
 import { site } from "@/content/site";
 
 // Wordmark + moon/house/rocket mark (public/brand/moon-mark.svg). TODO(launch): designer polish if desired.
-export function Logo() {
+/** Inline (mark beside wordmark) for the header; `stacked` (mark above, larger) matches the logo JPG. */
+export function Logo({ stacked = false }: { stacked?: boolean }) {
   const id = useId();
   return (
-    <Link href="/" className="inline-flex items-center gap-2.5" aria-label={`${site.name} home`}>
+    <Link href="/" className={`inline-flex items-center ${stacked ? "flex-col" : "gap-2"}`} aria-label={`${site.name} home`}>
       {/* eslint-disable-next-line @next/next/no-img-element -- tiny static SVG, no optimization needed */}
-      <img src="/brand/moon-mark.svg" alt="" width={72} height={45} className="h-11 w-auto" />
+      <img src="/brand/moon-mark.svg" alt="" width={160} height={100} className={stacked ? "-mb-1 h-24 w-auto" : "h-11 w-auto shrink-0 sm:h-14"} />
       <span className="inline-flex flex-col items-center leading-none">
-      <span className="font-display text-2xl font-extrabold tracking-tight" aria-hidden>
+      <span className={`whitespace-nowrap font-display font-extrabold tracking-tight ${stacked ? "text-3xl" : "text-xl sm:text-2xl"}`} aria-hidden>
         <span className="text-moon">MO</span>
         <svg viewBox="0 0 24 24" className="mx-[0.03em] inline-block h-[0.78em] w-[0.78em] translate-y-[0.03em]">
           <defs>
