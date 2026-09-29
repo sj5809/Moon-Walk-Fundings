@@ -48,15 +48,16 @@ export function QuoteForm() {
     e.preventDefault();
     if (!stepValid()) return;
     if (step < steps.length - 1) return setStep(step + 1);
-    if (!site.leadEndpoint) return setStatus("error"); // TODO(launch): set NEXT_PUBLIC_LEAD_ENDPOINT
     setStatus("sending");
     const data = Object.fromEntries(new FormData(e.currentTarget));
     const res = await fetch(site.leadEndpoint, {
       method: "POST",
       headers: { "Content-Type": "application/json", Accept: "application/json" },
-      body: JSON.stringify({ ...data, _subject: `New quote request: ${data.loanType}` }),
+      body: JSON.stringify({ ...data, _subject: `New quote request: ${data.loanType}`, _template: "table" }),
     }).catch(() => null);
-    setStatus(res?.ok ? "done" : "error");
+    // FormSubmit answers 200 with success "false" until the inbox owner clicks its one-time activation link.
+    const json = res?.ok ? await res.json().catch(() => ({})) : null;
+    setStatus(json && json.success !== "false" && json.success !== false ? "done" : "error");
   }
 
   if (status === "done") {
@@ -119,8 +120,8 @@ export function QuoteForm() {
           <input type="checkbox" name="consent" value="yes" className="mt-0.5 h-4 w-4 shrink-0 accent-[#1e90ff]" />
           {consentText}
         </label>
-        {/* Honeypot (Formspree's _gotcha): hidden from people, bots fill it in. */}
-        <input name="_gotcha" tabIndex={-1} autoComplete="off" aria-hidden className="hidden" />
+        {/* Honeypot (FormSubmit's _honey): hidden from people, bots fill it in. */}
+        <input name="_honey" tabIndex={-1} autoComplete="off" aria-hidden className="hidden" />
       </fieldset>
 
       {status === "error" && (

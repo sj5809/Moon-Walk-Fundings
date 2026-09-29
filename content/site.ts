@@ -12,8 +12,9 @@ export const site = {
   phone: "(859) 750-9333",
   tel: "tel:+18597509333",
   email: "janson@moonwalkfundings.com",
-  // Quote form destination (e.g. a Formspree form URL), set at build time. See README → Leads.
-  leadEndpoint: process.env.NEXT_PUBLIC_LEAD_ENDPOINT ?? "",
+  // Quote form destination. Default: FormSubmit emails each request to `email` (no account needed).
+  // Override at build time with NEXT_PUBLIC_LEAD_ENDPOINT. `||` so an empty CI variable falls back too.
+  leadEndpoint: process.env.NEXT_PUBLIC_LEAD_ENDPOINT || "https://formsubmit.co/ajax/janson@moonwalkfundings.com",
   // TODO(launch): confirm any state-specific licensing restrictions before advertising all 50 states.
   statesServed: "All 50 states",
   stats: [

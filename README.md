@@ -37,19 +37,17 @@ DNS (Namecheap → Advanced DNS): four `A` records on `@` → `185.199.108.153`,
 
 ## Leads
 
-GitHub Pages can't run server code, so the quote form posts directly to a form service such as [Formspree](https://formspree.io), which emails each request to janson@moonwalkfundings.com.
+GitHub Pages can't send email, so the quote form posts to [FormSubmit](https://formsubmit.co), a free service that emails each request to janson@moonwalkfundings.com. No account needed.
 
-1. Create a Formspree form that sends to janson@moonwalkfundings.com and copy its URL (`https://formspree.io/f/xxxxxxx`).
-2. In GitHub: Settings → Secrets and variables → Actions → **Variables** → add `LEAD_ENDPOINT` with that URL.
-3. Re-run the deploy workflow (Actions → Deploy to GitHub Pages → Run workflow).
+**One-time activation:** the first time someone submits the form, FormSubmit emails janson@moonwalkfundings.com an activation link. Click it once; every request after that arrives as an email. (The first submission itself isn't delivered — submit a test request after activating.)
 
-Until `LEAD_ENDPOINT` is set, the form shows a message asking people to call or email instead. For local testing: `NEXT_PUBLIC_LEAD_ENDPOINT=https://formspree.io/f/xxxxxxx npm run dev`.
+To use a different service (e.g. Formspree), set a repo variable `LEAD_ENDPOINT` (Settings → Secrets and variables → Actions → Variables) to its URL and re-run the deploy workflow.
 
 ## Before launch: placeholders and TODOs
 
 Run `grep -rn "TODO" app components content` for the live list.
 
-- [ ] **Lead delivery:** create the Formspree form and set the `LEAD_ENDPOINT` repo variable (see Leads above)
+- [ ] **Lead delivery:** submit a test quote, click FormSubmit's activation email at janson@moonwalkfundings.com, then submit again to confirm
 - [ ] **Testimonials:** replace the sample reviews with real ones and set `PLACEHOLDER = false`
 - [ ] **Legal:** attorney review of Privacy, Terms, Disclosures, the footer disclaimer, and the SMS consent text
 - [ ] **Licensing:** confirm any state-specific restrictions before advertising all 50 states, and add any required licensing disclosures
