@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test": "node --test lib/"
+    "test": "node --test lib/*.test.mjs"
   },
   "dependencies": {
     "next": "16.3.7",
