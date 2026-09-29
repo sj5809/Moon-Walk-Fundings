@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: { default: `${site.name} | Real Estate Investor Loans`, template: `%s | ${site.name}` },
   description: `DSCR, Fix & Flip, and Ground-Up Construction loans for real estate investors in all 50 states. ${site.tagline}`,
-  icons: { icon: "/brand/astronaut-mark.svg" },
+  icons: { icon: "/brand/moon-mark.svg" },
   openGraph: { siteName: site.name, type: "website", locale: "en_US" },
   // TODO(launch): add a 1200x630 /public/og.png (could be built from /brand/draft-hero.webp).
 };

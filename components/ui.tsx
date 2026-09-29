@@ -2,13 +2,13 @@ import Link from "next/link";
 import { useId } from "react";
 import { site } from "@/content/site";
 
-// TODO(launch): replace with the final logo SVG from the designer.
+// Wordmark + moon/house/rocket mark (public/brand/moon-mark.svg). TODO(launch): designer polish if desired.
 export function Logo() {
   const id = useId();
   return (
     <Link href="/" className="inline-flex items-center gap-2.5" aria-label={`${site.name} home`}>
       {/* eslint-disable-next-line @next/next/no-img-element -- tiny static SVG, no optimization needed */}
-      <img src="/brand/astronaut-mark.svg" alt="" width={40} height={40} className="h-10 w-10 drop-shadow-[0_0_8px_rgb(30_144_255/0.45)]" />
+      <img src="/brand/moon-mark.svg" alt="" width={72} height={45} className="h-11 w-auto" />
       <span className="inline-flex flex-col items-center leading-none">
       <span className="font-display text-2xl font-extrabold tracking-tight" aria-hidden>
         <span className="text-moon">MO</span>
@@ -16,7 +16,7 @@ export function Logo() {
           <defs>
             <linearGradient id={`${id}g`} x1="0" y1="0" x2="0" y2="1">
               <stop offset="0" stopColor="#fff" />
-              <stop offset="1" stopColor="#aeb7c6" />
+              <stop offset="1" stopColor="#1e90ff" />
             </linearGradient>
             <mask id={`${id}m`}>
               <rect width="24" height="24" fill="#fff" />

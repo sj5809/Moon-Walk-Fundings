@@ -53,6 +53,6 @@ Run `grep -rn "TODO" app components content` for the live list.
 - [ ] **Testimonials:** replace the sample reviews with real ones and set `PLACEHOLDER = false`
 - [ ] **Legal:** attorney review of Privacy, Terms, Disclosures, the footer disclaimer, and the SMS consent text
 - [ ] **Licensing:** confirm any state-specific restrictions before advertising all 50 states, and add any required licensing disclosures
-- [ ] **Logo:** final wordmark and astronaut mark from a designer (`components/ui.tsx`, `public/brand/astronaut-mark.svg`)
+- [ ] **Logo:** optional designer polish of the wordmark and mark (`components/ui.tsx`, `public/brand/moon-mark.svg`)
 - [ ] **Hero image:** high-res (2400px+) version of `public/brand/hero-scene.jpg`
 - [ ] **Social share image:** 1200×630 `public/og.png`, referenced in `app/layout.tsx`
