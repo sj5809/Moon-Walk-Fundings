@@ -1,36 +1,58 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Moon Walk Fundings
 
-## Getting Started
-
-First, run the development server:
+Next.js (App Router) + TypeScript + Tailwind v4.
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev    # http://localhost:3000
+npm test       # calculator math checks
+npm run build  # production build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Editing content
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+All copy lives in `/content`. No component changes needed.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| To change… | Edit | Result |
+|---|---|---|
+| Phone, email, stats, pillars, tagline | `content/site.ts` | Updates header, footer, home, about |
+| **Add a loan program** | add an entry to `loans` in `content/loans.ts` | New page at `/loans/<slug>`, added to nav, footer, home, learn hub, sitemap. Add a matching icon in `components/icons.tsx` (keyed by slug). |
+| **Add a comparison page** | add an entry to `comparisons` in `content/comparisons.ts` | New page at `/learn/compare/<slug>`, added to nav, learn hub, sitemap. `sequence` (step diagram) is optional. `related` slugs that don't exist yet show as "Coming soon". |
+| **Add / edit an FAQ** | the `faqs` array on any loan or comparison entry | FAQ accordion + FAQPage schema update automatically |
+| Testimonials | `content/testimonials.ts` | Set `PLACEHOLDER = false` once reviews are real |
+| Legal text | `content/legal.ts` | `/legal/privacy`, `/legal/terms`, `/legal/disclosures` |
+| Quote form options | `content/quote.ts` | Form and server validation both read from here |
 
-## Learn More
+**Rule:** describe loans in qualitative terms only. Never publish rates, points, LTV %, or credit minimums.
 
-To learn more about Next.js, take a look at the following resources:
+## Hosting (GitHub Pages)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The site is a static export (`npm run build` → `/out`). Pushing to `main` runs `.github/workflows/deploy.yml`, which tests, builds, and publishes to GitHub Pages. `public/CNAME` sets the custom domain `moonwalkfundings.com`.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+One-time repo setup:
+1. Settings → Pages → Source: **GitHub Actions**
+2. Settings → Pages → Custom domain: `moonwalkfundings.com`, then tick **Enforce HTTPS** once the certificate is ready
 
-## Deploy on Vercel
+DNS (Namecheap → Advanced DNS): four `A` records on `@` → `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`, and `CNAME` `www` → `sj5809.github.io.` Leave the Mail Settings section alone.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Leads
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+GitHub Pages can't run server code, so the quote form posts directly to a form service such as [Formspree](https://formspree.io), which emails each request to janson@moonwalkfundings.com.
+
+1. Create a Formspree form that sends to janson@moonwalkfundings.com and copy its URL (`https://formspree.io/f/xxxxxxx`).
+2. In GitHub: Settings → Secrets and variables → Actions → **Variables** → add `LEAD_ENDPOINT` with that URL.
+3. Re-run the deploy workflow (Actions → Deploy to GitHub Pages → Run workflow).
+
+Until `LEAD_ENDPOINT` is set, the form shows a message asking people to call or email instead. For local testing: `NEXT_PUBLIC_LEAD_ENDPOINT=https://formspree.io/f/xxxxxxx npm run dev`.
+
+## Before launch: placeholders and TODOs
+
+Run `grep -rn "TODO" app components content` for the live list.
+
+- [ ] **Lead delivery:** create the Formspree form and set the `LEAD_ENDPOINT` repo variable (see Leads above)
+- [ ] **Testimonials:** replace the sample reviews with real ones and set `PLACEHOLDER = false`
+- [ ] **Legal:** attorney review of Privacy, Terms, Disclosures, the footer disclaimer, and the SMS consent text
+- [ ] **Licensing:** confirm any state-specific restrictions before advertising all 50 states, and add any required licensing disclosures
+- [ ] **Logo:** final wordmark and astronaut mark from a designer (`components/ui.tsx`, `public/brand/astronaut-mark.svg`)
+- [ ] **Hero image:** high-res (2400px+) version of `public/brand/hero-scene.jpg`
+- [ ] **Social share image:** 1200×630 `public/og.png`, referenced in `app/layout.tsx`

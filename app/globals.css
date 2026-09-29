@@ -1,26 +1,106 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ---------- Design tokens ---------- */
+@theme {
+  --color-space-950: #060a17; /* page background — navy-black sky from the draft art */
+  --color-space-900: #0b1224; /* cards, alt sections */
+  --color-space-800: #111a30; /* raised surfaces, table header */
+  --color-space-700: #1f2b45; /* borders */
+  --color-ink: #e9edf5;       /* body text */
+  --color-muted: #a3adc2;     /* secondary text (AA on space-950/900) */
+  --color-moon: #d5dbe5;      /* moon-silver accents */
+  --color-electric: #1e90ff;  /* primary accent */
+  --color-cyan: #00bfff;      /* accent highlight */
+
+  --font-display: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  --shadow-glow: 0 0 24px rgb(30 144 255 / 0.45);
+  --shadow-glow-sm: 0 0 12px rgb(30 144 255 / 0.35);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+html {
+  scroll-behavior: smooth;
+}
+body {
+  background: var(--color-space-950);
+  color: var(--color-ink);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* ---------- Brand text ---------- */
+.text-moon {
+  background: linear-gradient(180deg, #ffffff 0%, #b8c0cd 55%, #e4e8ef 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.text-electric {
+  background: linear-gradient(90deg, var(--color-electric), var(--color-cyan));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ---------- Buttons (pill + glow) — in components layer so utilities can override ---------- */
+@layer components {
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 9999px;
+  padding: 0.75rem 1.5rem;
+  font-weight: 700;
+  font-family: var(--font-display);
+  transition: box-shadow 0.2s, transform 0.2s, background-color 0.2s;
+}
+.btn:hover { transform: translateY(-1px); }
+.btn:focus-visible { outline: 2px solid var(--color-cyan); outline-offset: 3px; }
+/* Dark text on bright blue: ~6:1 contrast (white would fail AA). */
+.btn-primary {
+  background: linear-gradient(90deg, var(--color-electric), var(--color-cyan));
+  color: var(--color-space-950);
+  box-shadow: var(--shadow-glow-sm);
+}
+.btn-primary:hover { box-shadow: var(--shadow-glow); }
+.btn-outline {
+  border: 1.5px solid var(--color-electric);
+  color: var(--color-ink);
+  box-shadow: inset 0 0 12px rgb(30 144 255 / 0.2), var(--shadow-glow-sm);
+}
+.btn-outline:hover { background: rgb(30 144 255 / 0.12); box-shadow: var(--shadow-glow); }
+}
+
+/* ---------- Starfield (pure CSS, used only in hero + CTA bands) ---------- */
+.starfield {
+  background-color: var(--color-space-950);
+  background-image:
+    radial-gradient(1px 1px at 20px 30px, #fff9, transparent),
+    radial-gradient(1px 1px at 90px 120px, #fff7, transparent),
+    radial-gradient(1.5px 1.5px at 160px 60px, #fffc, transparent),
+    radial-gradient(1px 1px at 230px 180px, #fff6, transparent),
+    radial-gradient(1px 1px at 300px 20px, #fff8, transparent),
+    radial-gradient(1.5px 1.5px at 60px 220px, #bfe3ffcc, transparent),
+    radial-gradient(1px 1px at 340px 250px, #fff5, transparent),
+    radial-gradient(ellipse 80% 60% at 70% 110%, rgb(30 144 255 / 0.18), transparent 70%);
+  background-size: 360px 280px, 360px 280px, 360px 280px, 360px 280px, 360px 280px, 360px 280px, 360px 280px, 100% 100%;
+}
+
+/* ---------- Scroll reveal: native CSS, no JS; skipped where unsupported or reduced motion ---------- */
+@keyframes reveal {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: none; }
+}
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal {
+      animation: reveal linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 35%;
+    }
   }
 }
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .btn { transition: none; }
 }
