@@ -13,7 +13,7 @@ export function Logo({ stacked = false }: { stacked?: boolean }) {
       <span className="inline-flex flex-col items-center leading-none">
       <span className={`whitespace-nowrap font-display font-extrabold tracking-tight ${stacked ? "text-3xl" : "text-xl sm:text-2xl"}`} aria-hidden>
         <span className="text-moon">MO</span>
-        <svg viewBox="0 0 24 24" className="mx-[0.03em] inline-block h-[0.78em] w-[0.78em] translate-y-[0.03em]">
+        <svg viewBox="0 0 24 24" className="mx-[0.03em] inline-block align-baseline h-[0.78em] w-[0.78em] translate-y-[0.03em]">
           <defs>
             <linearGradient id={`${id}g`} x1="0" y1="0" x2="0" y2="1">
               <stop offset="0" stopColor="#fff" />
