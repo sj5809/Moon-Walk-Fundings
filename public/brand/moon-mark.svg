@@ -31,7 +31,7 @@
 
   <rect x="103" y="60" width="9" height="18" fill="#0b1224" stroke="#e9edf5" stroke-width="1.6"/>
   <path d="M38 94 84 54l46 40h-12L84 64 50 94Z" fill="#0b1224" stroke="#e9edf5" stroke-width="1.6" stroke-linejoin="round"/>
-  <g fill="#1e90ff"><rect x="78.5" y="71" width="5" height="5"/><rect x="84.5" y="71" width="5" height="5"/><rect x="78.5" y="77" width="5" height="5"/><rect x="84.5" y="77" width="5" height="5"/></g>
+  <g fill="#f4f6fa"><rect x="78.5" y="71" width="5" height="5"/><rect x="84.5" y="71" width="5" height="5"/><rect x="78.5" y="77" width="5" height="5"/><rect x="84.5" y="77" width="5" height="5"/></g>
 
   <g transform="translate(136 24) rotate(45)">
     <path d="M-2.5 9 0 17 2.5 9Z" fill="#00bfff"/>
