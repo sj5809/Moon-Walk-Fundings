@@ -37,17 +37,13 @@ DNS (Namecheap → Advanced DNS): four `A` records on `@` → `185.199.108.153`,
 
 ## Leads
 
-GitHub Pages can't send email, so the quote form posts to [FormSubmit](https://formsubmit.co), a free service that emails each request to janson@moonwalkfundings.com. No account needed.
-
-**One-time activation:** the first time someone submits the form, FormSubmit emails janson@moonwalkfundings.com an activation link. Click it once; every request after that arrives as an email. (The first submission itself isn't delivered — submit a test request after activating.)
-
-To use a different service (e.g. Formspree), set a repo variable `LEAD_ENDPOINT` (Settings → Secrets and variables → Actions → Variables) to its URL and re-run the deploy workflow.
+GitHub Pages can't send email, so the quote form posts to [Web3Forms](https://web3forms.com), a free service that emails each request to janson@moonwalkfundings.com. The access key is `web3formsKey` in `content/site.ts`; it's public by design and only allows sending to that inbox. To change the destination inbox, create a new key at web3forms.com and replace it.
 
 ## Before launch: placeholders and TODOs
 
 Run `grep -rn "TODO" app components content` for the live list.
 
-- [ ] **Lead delivery:** submit a test quote, click FormSubmit's activation email at janson@moonwalkfundings.com, then submit again to confirm
+- [ ] **Lead delivery:** submit a test quote and confirm the email arrives at janson@moonwalkfundings.com
 - [ ] **Testimonials:** replace the sample reviews with real ones and set `PLACEHOLDER = false`
 - [ ] **Legal:** attorney review of Privacy, Terms, Disclosures, the footer disclaimer, and the SMS consent text
 - [ ] **Licensing:** confirm any state-specific restrictions before advertising all 50 states, and add any required licensing disclosures

@@ -12,9 +12,9 @@ export const site = {
   phone: "(859) 750-9333",
   tel: "tel:+18597509333",
   email: "janson@moonwalkfundings.com",
-  // Quote form destination. Default: FormSubmit emails each request to `email` (no account needed).
-  // Override at build time with NEXT_PUBLIC_LEAD_ENDPOINT. `||` so an empty CI variable falls back too.
-  leadEndpoint: process.env.NEXT_PUBLIC_LEAD_ENDPOINT || "https://formsubmit.co/ajax/janson@moonwalkfundings.com",
+  // Quote form → Web3Forms, which emails each request to janson@moonwalkfundings.com.
+  // The access key is public by design (it only allows sending to that inbox). Manage at web3forms.com.
+  web3formsKey: "4d27f7c4-39c4-4132-95a0-7e1d5b04ea7b",
   // TODO(launch): confirm any state-specific licensing restrictions before advertising all 50 states.
   statesServed: "All 50 states",
   stats: [

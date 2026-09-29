@@ -28,9 +28,6 @@ jobs:
       - run: npm ci
       - run: npm test
       - run: npm run build
-        env:
-          # Repo Settings → Secrets and variables → Actions → Variables → LEAD_ENDPOINT (e.g. your Formspree URL)
-          NEXT_PUBLIC_LEAD_ENDPOINT: ${{ vars.LEAD_ENDPOINT }}
       - uses: actions/upload-pages-artifact@v3
         with:
           path: out

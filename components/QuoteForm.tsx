@@ -50,14 +50,19 @@ export function QuoteForm() {
     if (step < steps.length - 1) return setStep(step + 1);
     setStatus("sending");
     const data = Object.fromEntries(new FormData(e.currentTarget));
-    const res = await fetch(site.leadEndpoint, {
+    const res = await fetch("https://api.web3forms.com/submit", {
       method: "POST",
       headers: { "Content-Type": "application/json", Accept: "application/json" },
-      body: JSON.stringify({ ...data, _subject: `New quote request: ${data.loanType}`, _template: "table" }),
+      body: JSON.stringify({
+        ...data,
+        access_key: site.web3formsKey,
+        subject: `New quote request: ${data.loanType} — ${data.firstName} ${data.lastName}`,
+        from_name: site.name,
+        replyto: data.email,
+      }),
     }).catch(() => null);
-    // FormSubmit answers 200 with success "false" until the inbox owner clicks its one-time activation link.
-    const json = res?.ok ? await res.json().catch(() => ({})) : null;
-    setStatus(json && json.success !== "false" && json.success !== false ? "done" : "error");
+    const json = res ? await res.json().catch(() => null) : null;
+    setStatus(json?.success ? "done" : "error");
   }
 
   if (status === "done") {
@@ -120,8 +125,8 @@ export function QuoteForm() {
           <input type="checkbox" name="consent" value="yes" className="mt-0.5 h-4 w-4 shrink-0 accent-[#1e90ff]" />
           {consentText}
         </label>
-        {/* Honeypot (FormSubmit's _honey): hidden from people, bots fill it in. */}
-        <input name="_honey" tabIndex={-1} autoComplete="off" aria-hidden className="hidden" />
+        {/* Honeypot (Web3Forms' botcheck): hidden from people, bots tick it. */}
+        <input type="checkbox" name="botcheck" tabIndex={-1} aria-hidden className="hidden" />
       </fieldset>
 
       {status === "error" && (
