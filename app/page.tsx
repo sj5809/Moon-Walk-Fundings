@@ -51,7 +51,7 @@ export default function Home() {
           </p>
           <div className="mt-8 flex flex-col gap-4 sm:flex-row">
             <Link href="/get-a-quote" className="btn btn-primary text-lg">{site.primaryCta} ›</Link>
-            <a href={site.tel} className="btn btn-outline text-lg"><PhoneIcon /> Talk to a Lender</a>
+            <a href={site.tel} className="btn btn-outline text-lg"><PhoneIcon /> Talk to Janson</a>
           </div>
         </div>
       </section>

@@ -115,7 +115,7 @@ export function PageHero({
         {ctas && (
           <div className="mt-8 flex flex-col gap-4 sm:flex-row">
             <Link href="/get-a-quote" className="btn btn-primary">Get a Quote</Link>
-            <a href={site.tel} className="btn btn-outline"><PhoneIcon /> Talk to a Lender</a>
+            <a href={site.tel} className="btn btn-outline"><PhoneIcon /> Talk to Janson</a>
           </div>
         )}
         {children}
