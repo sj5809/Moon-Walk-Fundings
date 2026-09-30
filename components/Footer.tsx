@@ -31,6 +31,7 @@ export function Footer() {
           <Col
             title="Company"
             links={[
+              { label: "Home", href: "/" },
               { label: "About", href: "/about" },
               { label: "Contact", href: "/contact" },
               { label: "Get a Quote", href: "/get-a-quote" },

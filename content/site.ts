@@ -41,6 +41,7 @@ export const calculatorLinks: NavLink[] = [
 ];
 
 export const nav: NavItem[] = [
+  { label: "Home", href: "/" },
   { label: "Loan Programs", children: loanLinks },
   { label: "Learn", children: learnLinks },
   { label: "Calculators", children: calculatorLinks },
